@@ -1,0 +1,71 @@
+{
+  "stac_version": "0.6.2",
+  "id": "projects/ecmwf/era5_monthly",
+  "title": "ECMWF ERA5 monthly",
+  "description": "A first segment of the ERA5 dataset is now available for public use (1979 to within 3 months of real time). ERA5 provides hourly estimates of a large number of atmospheric, land and oceanic climate variables. The data cover the Earth on a 30km grid and resolve the atmosphere using 137 levels from the surface up to a height of 80km. ERA5 includes information about uncertainties for all variables at reduced spatial and temporal resolutions.\n\nQuality-assured monthly updates of ERA5 are now published within 3 months of real time. Preliminary daily updates of the dataset will soon be made available to users within 7 days of real time.\n\nSubsequent releases of ERA5 will cover the earlier decades. The entire ERA5 dataset from 1950 to present is expected to be available for use in late 2019.\n\nERA5 combines [vast amounts of historical observations](https://software.ecmwf.int/wiki/display/CKB/ERA5+data+documentation#ERA5datadocumentation-Observations) into global estimates using advanced modelling and data assimilation systems. Access to all observations used in ERA5 will be provided at a later stage.\n\nERA5 will eventually replace the ERA-Interim reanalysis. You can read about the [key characteristics of ERA5 and important changes relative to ERA-Interim](http://software.ecmwf.int/wiki/pages/viewpage.action?pageId=74764925).",
+  "license": "proprietary",
+  "links": [
+    {
+      "href": "https://apps.ecmwf.int/datasets/licences/copernicus/",
+      "rel": "license",
+      "title": "Licence to Use ECMWF Copernicus Products",
+      "type": "text/html"
+    }
+  ],
+  "extent": {
+    "spatial": [-180, -90, 180, 90],
+    "temporal": ["2010-01-01T00:00:00Z", "2018-12-31T23:59:59Z"]
+  },
+  "keywords": [
+    "copernicus", 
+    "ecmwf",
+    "forecast",
+    "meteorology", 
+    "era5"
+  ], 
+  "providers": [
+    {
+      "url": "https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5", 
+      "roles": [
+        "producer", 
+        "licensor"
+      ], 
+      "name": "ECWMF"
+    }, 
+    {
+      "roles": [
+        "host"
+      ], 
+      "name": "Google Earth Engine"
+    }
+  ], 
+  "properties": {
+    "gee:type": "image_collection", 
+    "eo:bands": [
+      {
+        "name": "t2m"
+      }
+    ],
+    "cube:dimensions": {
+      "x": {
+        "type": "spatial",
+        "axis": "x",
+        "extent": [-180, 180]
+      },
+      "y": {
+        "type": "spatial",
+        "axis": "y",
+        "extent": [-90, 90]
+      },
+      "temporal": {
+        "type": "temporal",
+        "extent": ["2010-01-01T00:00:00Z", "2018-12-31T23:59:59Z"]
+      },
+      "bands": {
+        "type": "bands",
+        "values": ["t2m"]
+      }
+    },
+    "sci:citation": "Copernicus Climate Change Service (C3S) (2017): ERA5: Fifth generation of ECMWF atmospheric reanalyses of the global climate . Copernicus Climate Change Service Climate Data Store (CDS), date of access. https://cds.climate.copernicus.eu/cdsapp#!/home"
+  }
+}

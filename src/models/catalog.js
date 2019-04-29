@@ -112,40 +112,42 @@ module.exports = class DataCatalog {
 			delete c.properties['gee:asset_schema'];
 
 			// Add default dimensions
-			var y2 = c.extent.spatial.length > 4 ? 4 : 3;
-			c.properties['cube:dimensions'] = {
-				x: {
-					type: "spatial",
-					axis: "x",
-					extent: [c.extent.spatial[0], c.extent.spatial[x2]]
-				},
-				y: {
-					type: "spatial",
-					axis: "y",
-					extent: [c.extent.spatial[1], c.extent.spatial[y2]]
-				},
-				temporal: {
-					type: "temporal",
-					extent: c.extent.temporal
-				}
-			};
-			var bandNames = [];
-			for(var j in c.properties['eo:bands']) {
-				var b = c.properties['eo:bands'][j];
-				if (typeof b.name === 'string') {
-					bandNames.push(b.name);
-				}
-			}
-			if (bandNames.length > 0) {
-				c.properties['cube:dimensions'].bands = {
-				  type: "bands",
-				  values: bandNames
+			if (!c.properties['cube:dimensions']) {
+				var y2 = c.extent.spatial.length > 4 ? 4 : 3;
+				c.properties['cube:dimensions'] = {
+					x: {
+						type: "spatial",
+						axis: "x",
+						extent: [c.extent.spatial[0], c.extent.spatial[x2]]
+					},
+					y: {
+						type: "spatial",
+						axis: "y",
+						extent: [c.extent.spatial[1], c.extent.spatial[y2]]
+					},
+					temporal: {
+						type: "temporal",
+						extent: c.extent.temporal
+					}
 				};
-			}
-			if (typeof c.properties['eo:epsg'] === 'number') {
-				// Unfortunately, no other information available
-				c.properties['cube:dimensions'].x.reference_system = c.properties['eo:epsg'];
-				c.properties['cube:dimensions'].y.reference_system = c.properties['eo:epsg'];
+				var bandNames = [];
+				for(var j in c.properties['eo:bands']) {
+					var b = c.properties['eo:bands'][j];
+					if (typeof b.name === 'string') {
+						bandNames.push(b.name);
+					}
+				}
+				if (bandNames.length > 0) {
+					c.properties['cube:dimensions'].bands = {
+					type: "bands",
+					values: bandNames
+					};
+				}
+				if (typeof c.properties['eo:epsg'] === 'number') {
+					// Unfortunately, no other information available
+					c.properties['cube:dimensions'].x.reference_system = c.properties['eo:epsg'];
+					c.properties['cube:dimensions'].y.reference_system = c.properties['eo:epsg'];
+				}
 			}
 
 			c.links = c.links.map(l => {

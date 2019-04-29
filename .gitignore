@@ -4,6 +4,7 @@
 !/storage/collections/COPERNICUS_S2.json
 !/storage/collections/COPERNICUS_S2_SR.json
 !/storage/collections/COPERNICUS_S3_OLCI.json
+!/storage/collections/projects_*
 /storage/database/*.db
 /storage/user_files/*
 /storage/temp_files/*
