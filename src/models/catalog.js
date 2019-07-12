@@ -131,16 +131,17 @@ module.exports = class DataCatalog {
 					}
 				};
 				var bandNames = [];
-				for(var j in c.properties['eo:bands']) {
-					var b = c.properties['eo:bands'][j];
+				var bands = c.properties['eo:bands'] || c.properties['sar:bands'];
+				for(var j in bands) {
+					var b = bands[j];
 					if (typeof b.name === 'string') {
 						bandNames.push(b.name);
 					}
 				}
 				if (bandNames.length > 0) {
 					c.properties['cube:dimensions'].bands = {
-					type: "bands",
-					values: bandNames
+					  type: "bands",
+					  values: bandNames
 					};
 				}
 				if (typeof c.properties['eo:epsg'] === 'number') {

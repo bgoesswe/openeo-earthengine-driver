@@ -1,13 +1,13 @@
 # openeo-earthengine-driver
 openEO back-end driver for [Google Earth Engine](https://earthengine.google.com/).
 
-This back-end currently supports **openEO API version 0.3.1**, version 0.4.0 is currently in development.
+This back-end currently supports **openEO API version 0.4.2**.
 Legacy versions are available as releases.
 
 ## Demo
 
-* The most recent version (openEO API v0.3.1) is running at https://earthengine.openeo.org/v0.3
-* The development version (openEO API v0.4.0) is running at https://earthengine.openeo.org/v0.4
+* The most recent version (openEO API v0.4.2) is running at https://earthengine.openeo.org/v0.4
+* A legacy version (openEO API v0.3.1) is running at https://earthengine.openeo.org/v0.3
 
 Multiple user accounts are available to be used (`group1`, `group2`, ... until `group15`), each with password `test123`.
 
@@ -50,7 +50,9 @@ An exemplary process graph to create an on-demand XYZ web-service looks like thi
   "load_collection": {
     "arguments": {
       "id": "COPERNICUS/S2",
-      "temporal_extent": ["2018-04-30","2018-06-26"]
+      "temporal_extent": ["2018-04-30","2018-06-26"],
+      "spatial_extent": null,
+      "bands": ["B4", "B8"]
     },
     "process_id": "load_collection"
   },
@@ -112,8 +114,8 @@ var img = ee.ImageCollection("COPERNICUS/S2");
 img = img.filterDate("2018-04-30", "2018-06-26");
 
 // filter_bands (2x)
-var band1 = img.select(["B4"],["B4"]);
-var band2 = img.select(["B8"],["B8"]);
+var band1 = img.select(["B4"]);
+var band2 = img.select(["B8"]);
 
 // normalized_difference
 var combined = band1.combine(band2);

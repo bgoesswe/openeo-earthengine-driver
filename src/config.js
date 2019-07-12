@@ -6,7 +6,7 @@ module.exports = class Config {
 
 		this.hostname = "127.0.0.1";
 		this.apiPath = "/";
-		this.apiVersion = "0.4.0";
+		this.apiVersion = "0.4.2";
 
 		this.title = "Google Earth Engine";
 		this.description = "This is the Google Earth Engine Driver for openEO.";
@@ -30,7 +30,13 @@ module.exports = class Config {
 
 		this.outputFormats = {
 			PNG: {
-				gis_data_types: ['raster']
+				gis_data_types: ['raster'],
+				parameters: {
+					red: {description: 'Band name being used for the red channel.'},
+					green: {description: 'Band name being used for the green channel.'},
+					blue: {description: 'Band name being used for the blue channel.'},
+					gray: {description: 'Band name being used as a gray channel.'},
+				}
 			},
 			JPEG: {
 				gis_data_types: ['raster']

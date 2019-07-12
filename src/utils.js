@@ -5,6 +5,7 @@ const fse = require('fs-extra');
 const path = require('path');
 const axios = require('axios');
 const Errors = require('./errors');
+const { Utils: CommonUtils } = require('@openeo/js-commons');
 
 var Utils = {
 
@@ -38,14 +39,11 @@ var Utils = {
 	},
 
 	isObject(obj) {
-		return (obj === Object(obj) && !Array.isArray(obj));
+		return CommonUtils.isObject(obj);
 	},
 	
 	size(obj) {
-		if (obj === null) {
-			return 0;
-		}
-		return Object.keys(obj).length;
+		return CommonUtils.size(obj);
 	},
 
 	loadDB(name) {
@@ -66,8 +64,17 @@ var Utils = {
 		return Math.floor(Date.now() / 1000);
 	},
 
-	getISODateTime() {
-		return (new Date()).toISOString().replace(/\.\d{3}/, '');
+	getISODateTime(datetime = null) {
+		if (datetime === null) {
+			datetime = new Date();
+		}
+		else if (typeof datetime === 'string' || typeof datetime === 'number') {
+			datetime = new Date(datetime);
+		}
+		if (datetime instanceof Date) {
+			datetime = datetime.toISOString();
+		}
+		return datetime.replace(/\.\d{3}/, ''); // Remove milliseconds
 	},
 
 	geoJsonBbox(geojson) {
@@ -188,7 +195,7 @@ var Utils = {
 				const filepath = path.join(dir, file);
 				return fse.stat(filepath).then(stats => {
 					if (stats.isDirectory()) {
-						return walk(filepath);
+						return this.walk(filepath);
 					}
 					else if (stats.isFile()) {
 						return Promise.resolve({
