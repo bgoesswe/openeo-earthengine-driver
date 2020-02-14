@@ -477,5 +477,37 @@
 		"tags": [
 			"Secondary Services Management"
 		]
+	},
+	"LabelsNotEnumerated": {
+		"description": null,
+		"message": "The dimension labels are not enumerated.",
+		"http": 400,
+		"tags": [
+			"Processes"
+		]
+	},
+	"LabelMismatch": {
+		"description": null,
+		"message": "The number of labels in the parameters `source` and `target` don't match",
+		"http": 400,
+		"tags": [
+			"Processes"
+		]
+	},
+	"LabelNotAvailable": {
+		"description": null,
+		"message": "A label with the specified name does not exist.",
+		"http": 400,
+		"tags": [
+			"Processes"
+		]
+	},
+	"LabelExists": {
+		"description": null,
+		"message": "A label with the specified name exists.",
+		"http": 400,
+		"tags": [
+			"Processes"
+		]
 	}
 }
