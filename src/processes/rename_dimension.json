@@ -1,12 +1,12 @@
 {
     "id": "rename_dimension",
     "summary": "Renames a dimension",
-    "description": "Renames a dimension in the data cube. Afterwards, the dimension can be referenced with the new name.",
+    "description": "Renames a dimension in the data cube while preserving all other properties.",
     "categories": [
         "cubes"
     ],
     "experimental": true,
-    "parameter_order": ["data", "old", "new"],
+    "parameter_order": ["data", "source", "target"],
     "parameters": {
         "data": {
             "description": "The data cube.",
